@@ -1,4 +1,5 @@
 #comandi da fare nel terminale di rstudio
+#RSTUDIO
 
 pwd
 
