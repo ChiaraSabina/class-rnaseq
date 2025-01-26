@@ -7,9 +7,13 @@ ls -l
 
 cd datiesame
 
+#creo rawdata ma non entro dentro raw_data
+
 mkdir -p rawdata
 
 tar -xzvf data_rnaseq.tar.gz -C rawdata
+
+#in rawdata dovrei avere 12 campioni 
 
 cd rawdata
 
@@ -32,7 +36,9 @@ salmon quant \
 echo -e "$name done now\n"
 done
 
-#spostarsi adesso sulla console e settare la working directory su datiesame
+#dopo il for io in rawdata devo avere i 12 file di prima, le 6 cartelle con all'interno altri 6 file ( per ogni cartella )
+
+#spostarsi adesso sulla console e settare la working directory su datiesame, prima schiaccio datiesame ( la cartella ) e  faccio setworking directory 
 
 library(DESeq2)
 library(tximport)
@@ -168,6 +174,8 @@ ego <- enrichGO( gene = sig_genes,
 
 ego
 
+# se ci escono 0 termini arricchiti non faccio ne il dotplot ne cnetplot 
+
 dotplot(ego, showCategory=10)
 
 cnetplot(ego, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
@@ -212,7 +220,7 @@ disease2gene=gda[, c("diseaseId", "geneId")]
 disease2name=gda[, c("diseaseId", "diseaseName")]
 
 disgnet = enricher(entrez_genes_sig, TERM2GENE=disease2gene, TERM2NAME=disease2name)
-
+disgnet  
 
 cnetplot(disgnet, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
 
