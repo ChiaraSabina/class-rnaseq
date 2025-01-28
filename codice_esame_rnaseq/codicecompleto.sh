@@ -148,7 +148,10 @@ universe <- AnnotationDbi::select(org.Hs.eg.db,
                                   keytype = 'ENTREZID')
 
 sig_genes <- resdata$gene[which(resdata$padj<0.05)]
+sig_genes
+
 entrez_genes_sig <- unique(universe[which(universe$ENSEMBL %in% sig_genes),]$ENTREZID)
+entrez_genes_sig
 
 pvalue_ens_genes <- resdata$padj[which(resdata$padj<0.05)]
 names(pvalue_ens_genes)<-sig_genes
